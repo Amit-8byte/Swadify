@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Swadify Kitchen | Corporate Meal Delivery",
   description:
     "Swadify Kitchen delivers hygienic, home-style meals to corporate offices.",
+  icons: {
+    icon: "/images/loader-bg.png",
+  },
 };
 
 export default function RootLayout({

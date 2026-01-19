@@ -10,6 +10,7 @@ export default function CTA() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     address: "",
     message: "",
   });
@@ -31,6 +32,12 @@ export default function CTA() {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
     }
 
     if (!formData.address.trim()) {
@@ -85,7 +92,7 @@ export default function CTA() {
 
       if (result.success) {
         setSubmitStatus("success");
-        setFormData({ name: "", email: "", address: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", address: "", message: "" });
       } else {
         setSubmitStatus("error");
         console.error("Web3Forms Error:", result);
@@ -120,14 +127,18 @@ export default function CTA() {
               </h3>
               
               <div className="space-y-4 text-lg">
-                <div>
-                  <p className="text-orange-200 text-sm font-bold uppercase tracking-wider mb-1">Contact Number</p>
-                  <p className="font-semibold">+91 98765 43210</p> {/* Placeholder for Contact Number */}
-                </div>
-                
-                <div>
-                  <p className="text-orange-200 text-sm font-bold uppercase tracking-wider mb-1">Email</p>
-                  <p className="font-semibold">contact@swadify.com</p> {/* Placeholder for Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-orange-200 text-sm font-bold uppercase tracking-wider mb-1">Contact Number</p>
+                    <p className="font-semibold">+91 9868918083</p> {/* Placeholder for Contact Number */}
+                    <p className="font-semibold">+91 9599521306</p> {/* Placeholder for second number */}
+                    <p className="font-semibold">+91 8076700377</p> {/* Placeholder for second number */}
+                  </div>
+                  
+                  <div>
+                    <p className="text-orange-200 text-sm font-bold uppercase tracking-wider mb-1">Email</p>
+                    <p className="font-semibold">contact@swadify.com</p> {/* Placeholder for Email */}
+                  </div>
                 </div>
 
                 <div>
@@ -202,18 +213,34 @@ export default function CTA() {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="address" className="block text-sm font-bold text-neutral-700 mb-2">Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.address ? 'border-red-500 focus:ring-red-200' : 'border-neutral-300 focus:ring-orange-200'} focus:border-orange-500 focus:ring-4 outline-none transition-all`}
-                  placeholder="123 Business Park, Tech City"
-                />
-                {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-bold text-neutral-700 mb-2">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? 'border-red-500 focus:ring-red-200' : 'border-neutral-300 focus:ring-orange-200'} focus:border-orange-500 focus:ring-4 outline-none transition-all`}
+                    placeholder="+91 98765 43210"
+                  />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="address" className="block text-sm font-bold text-neutral-700 mb-2">Address</label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.address ? 'border-red-500 focus:ring-red-200' : 'border-neutral-300 focus:ring-orange-200'} focus:border-orange-500 focus:ring-4 outline-none transition-all`}
+                    placeholder="123 Business Park, Tech City"
+                  />
+                  {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+                </div>
               </div>
 
               <div>

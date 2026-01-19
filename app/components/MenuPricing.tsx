@@ -12,7 +12,7 @@ const plans = [
   },
   {
     name: "South Indian",
-    price: "₹149",
+    price: "₹189",
     description: "Light, healthy, and authentic.",
     features: ["Rice / Roti", "Sambar & Rasam", "Poriyal / Kootu", "Curd & Papad"],
     recommended: true,
