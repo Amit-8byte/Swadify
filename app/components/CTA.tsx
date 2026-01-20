@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function CTA() {
   // TODO: Replace with your actual Google Maps location URL
-  const googleMapsUrl = "https://maps.google.com/?q=123+Swadify+Kitchen+HQ";
+  const googleMapsUrl = "https://www.google.com/maps/place/28%C2%B035'51.2%22N+76%C2%B059'02.2%22E/@28.597559,76.9813729,17z/data=!3m1!4b1!4m4!3m3!8m2!3d28.597559!4d76.9839478?hl=en&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -150,8 +150,8 @@ export default function CTA() {
                     className="block group"
                   >
                     <p className="font-semibold group-hover:text-orange-200 transition-colors">
-                      123, Swadify Kitchen HQ, <br/>
-                      Industrial Area, City - 110001
+                      E2b gali number 1 ,Roshan Vihar  <br/>
+                      Najafgarh ,New delhi
                     </p>
                     <span className="text-sm text-orange-200 underline mt-1 inline-block group-hover:text-white transition-colors">
                       View on Google Maps
