@@ -137,7 +137,7 @@ export default function CTA() {
                   
                   <div>
                     <p className="text-orange-200 text-sm font-bold uppercase tracking-wider mb-1">Email</p>
-                    <p className="font-semibold">contact@swadify.com</p> {/* Placeholder for Email */}
+                    <p className="font-semibold">contact@swadifykitchen.com</p> {/* Placeholder for Email */}
                   </div>
                 </div>
 
