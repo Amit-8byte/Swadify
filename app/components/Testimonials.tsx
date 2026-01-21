@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -11,11 +12,34 @@ interface Feedback {
   id?: string;
   name: string;
   message: string;
+  designation?: string;
   rating: number;
+  link?: string;
+  image?: string;
 }
 
 export default function Testimonials() {
-  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+  const manualFeedbacks: Feedback[] = [
+    {
+      name: "QUA LOAN",
+      message: "Swadify has transformed our office lunches. The food is consistently fresh, hygienic, and tastes just like a home-cooked meal. Highly recommended!", 
+      designation: "Floor Manager",
+      rating: 5,
+      link: "https://qualoan.com",
+      image: "/images/qualoan-logo.png",
+    },
+    {
+      name: "QUA LOAN",
+      message: "Managing lunch for the team used to be a hassle, but Swadify made it seamless. Great variety and punctual delivery every single day.",
+      designation: "Team Leader",
+      rating: 5,
+      link: "https://qualoan.com",
+      image: "/images/qualoan-logo.png",
+    },
+   
+  ];
+
+  const [feedbacks, setFeedbacks] = useState<Feedback[]>(manualFeedbacks);
 
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", message: "", rating: 5 });
@@ -24,7 +48,9 @@ export default function Testimonials() {
   useEffect(() => {
     fetch("/api/feedback")
       .then((res) => res.json())
-      .then((data) => setFeedbacks(data))
+      .then((data) => {
+        if (Array.isArray(data)) setFeedbacks((prev) => [...prev, ...data]);
+      })
       .catch((err) => console.error("Failed to fetch feedback", err));
   }, []);
 
@@ -114,14 +140,44 @@ export default function Testimonials() {
                         </span>
                       ))}
                     </div>
-                    <p className="text-neutral-700 italic mb-6 flex-1">
-                      &ldquo;{feedback.message}&rdquo;
-                    </p>
+                    <div className="mb-6 flex-1">
+                      <p className="text-neutral-700 italic mb-2">
+                        &ldquo;{feedback.message}&rdquo;
+                      </p>
+                      {feedback.designation && (
+                        <p className="text-sm text-neutral-500 font-bold">{feedback.designation}</p>
+                      )}
+                    </div>
                     <div className="flex items-center mt-auto">
-                      <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold mr-3">
-                        {feedback.name.charAt(0)}
+                      {feedback.image ? (
+                        <div className="w-10 h-10 relative mr-3 rounded-full overflow-hidden border border-neutral-100 bg-white">
+                          <Image
+                            src={feedback.image}
+                            alt={feedback.name}
+                            fill
+                            className="object-contain p-1"
+                            unoptimized
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold mr-3">
+                          {feedback.name.charAt(0)}
+                        </div>
+                      )}
+                      <div className="flex flex-col">
+                        {feedback.link ? (
+                          <a
+                            href={feedback.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold text-black hover:text-orange-600 transition-colors leading-tight"
+                          >
+                            {feedback.name}
+                          </a>
+                        ) : (
+                          <span className="font-bold text-black leading-tight">{feedback.name}</span>
+                        )}
                       </div>
-                      <span className="font-bold text-black">{feedback.name}</span>
                     </div>
                   </div>
                 </SwiperSlide>
